@@ -1,26 +1,58 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react"
+import { AwardCardDeck, GreenCardDeck, Grid, Pile, VillageCard } from "village-green-lib"
 
-function App() {
+import { GreenView } from "./GreenView"
+
+import "./App.css"
+
+const App = () => {
+  const [grid, setGrid] = useState(Grid.create(3, 3, new VillageCard("Lower VillageName"), () => new Pile([])))
+
+  const generateGrid = () => {
+    let greenDeck = GreenCardDeck.createDefault()
+    greenDeck.shuffle()
+
+    let awardDeck = AwardCardDeck.createDefault()
+    awardDeck.shuffle()
+
+    let newGrid = Grid.create(3, 3, new VillageCard("Lower VillageName"), () => new Pile([]))
+
+    for (let i = 0; i < 3; i++) {
+      newGrid.playAwardCard(awardDeck.drawOne(), false, i)
+    }
+
+    for (let i = 0; i < 3; i++) {
+      newGrid.playAwardCard(awardDeck.drawOne(), true, i)
+    }
+
+    for (let i = 0; i < 3; i++) {
+      for (let j = 0; j < 3; j++) {
+        newGrid.playGreenCard(greenDeck.drawOne(), i, j)
+      }
+    }
+
+    setGrid(newGrid)
+  }
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <div>
+          <span>Village Green</span>
+        </div>
+
+        <GreenView grid={grid} />
+
+        <div>
+          <span>Score: {grid.getScore()}</span>
+        </div>
+
+        <button onClick={generateGrid}>
+          Generate
+        </button>
       </header>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
