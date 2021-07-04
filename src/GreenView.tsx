@@ -15,13 +15,15 @@ export const GreenView = (props: GreenViewProps) => {
                 <div className="flex-center">
                     <VillageView village={grid.villageCard} />
 
-                    {grid.columnAwards.map(a => <AwardView award={a} />)}
+                    {grid.columnAwards.map((a, i) => {
+                        return <AwardView award={a} score={grid.getColumnScore(i)} />
+                    })}
                 </div>
 
                 {grid.piles.map((row, index) => {
                     return (
                         <div className="flex-center">
-                            <AwardView award={grid.rowAwards[index]} />
+                            <AwardView award={grid.rowAwards[index]} score={grid.getRowScore(index)} />
 
                             {row.map(p => <PileView pile={p} />)}
                         </div>

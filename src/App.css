@@ -30,3 +30,32 @@
 .card-view span {
   font-size: 10pt;
 }
+
+.village-view {
+  background-color: slategrey;
+}
+
+.award-view {
+  background-color: purple;
+}
+
+.pile-view.red {
+  background-color: red;
+}
+
+.pile-view.yellow {
+  background-color: gold;
+  color: black;
+}
+
+.pile-view.blue {
+  background-color: mediumblue;
+}
+
+.pile-view.lawn {
+  background-color: green;
+}
+
+.big-score > span {
+  font-weight: bolder;
+}

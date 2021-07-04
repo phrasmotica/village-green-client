@@ -4,6 +4,7 @@ import { AwardCardDeck, GreenCardDeck, Grid, Pile, VillageCard } from "village-g
 import { GreenView } from "./GreenView"
 
 import "./App.css"
+import "semantic-ui-css/semantic.min.css"
 
 const App = () => {
   const [grid, setGrid] = useState(Grid.create(3, 3, new VillageCard("Lower VillageName"), () => new Pile([])))
@@ -29,6 +30,10 @@ const App = () => {
       for (let j = 0; j < 3; j++) {
         newGrid.playGreenCard(greenDeck.drawOne(), i, j)
       }
+    }
+
+    if (Math.random() < 0.5) {
+      newGrid.flipVillageCard()
     }
 
     setGrid(newGrid)
