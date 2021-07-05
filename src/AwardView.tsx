@@ -14,12 +14,6 @@ export const AwardView = (props: AwardViewProps) => {
 
     let nameText = award?.name ?? "(empty)"
 
-    let criteriaText = "-"
-    if (award !== null ) {
-        let criteriaCount = award.criteria.length
-        criteriaText = `${criteriaCount} ${criteriaCount === 1 ? "criterion" : "criteria"}`
-    }
-
     let scoreElement = <div><span>-</span></div>
     if (award !== null) {
         let className = props.score >= 6 ? "big-score" : ""
@@ -97,15 +91,13 @@ export const AwardView = (props: AwardViewProps) => {
 
     return (
         <div className="card-view award-view">
-            <div><span>{nameText}</span></div>
+            <div>
+                <span>
+                    {nameText}
+                </span>
+            </div>
 
             <div>
-                <div>
-                    <span>
-                        {criteriaText}
-                    </span>
-                </div>
-
                 {descriptionModalButton}
             </div>
 
